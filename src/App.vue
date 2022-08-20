@@ -1,10 +1,12 @@
 <template>
   <section>
+    <Navbar />
     <router-view class="app-main" />
   </section>
 </template>
 
 <script setup>
+import Navbar from "./components/Navbar.vue"
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
