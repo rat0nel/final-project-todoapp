@@ -17,8 +17,8 @@
 				  <li class="mr-3" v-if="currentRoute === '/auth'">
 					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="/auth">SIGNUP</a>
 				  </li>
-				  <li class="mr-3" v-if="currentRoute === '/'">
-					<a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">LOG OUT</a>
+				  <li class="mr-3" v-if="true">
+					<button class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" @click.prevent="logout">LOG OUT</button>
 				  </li>
 				</ul>
 			</div>
@@ -26,7 +26,7 @@
     </nav>
 </template>
 
-<script>
+<!-- <script>
 import { ref } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import { useUserStore } from "../store/user";
@@ -34,20 +34,30 @@ import { useUserStore } from "../store/user";
 export default {
 	
 	computed: {
-		currentRoute() {
+		
+	}, -->
+
+	
+	
+<script>
+export default {
+	setup() {
+		const logout = async () => {
+	
+	await user.signOut();
+	router.push({name: 'Auth'});
+};
+function currentRoute() {
 			return this.$route.fullPath;
 		}
-	},
-
-	/*const logout = async () => {
-	
-	await user.signIn(email.value, password.value);
-
-	router.push({name: 'Auth'})*/
-	
+		return { logout, currentRoute}
+	}
 }
+
+
 </script>
 
 <style>
 
 </style>
+
