@@ -6,6 +6,7 @@ import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
+    login: true
   }),
 
   actions: {
@@ -35,6 +36,9 @@ export const useUserStore = defineStore("user", {
       const { error } = await supabase.auth.signOut()
       if (error) throw error;
     },
+      // const toggleLogin = ()=>{
+    //     login.value = !login.value
+    // }
 
     persist: {
       enabled: true,

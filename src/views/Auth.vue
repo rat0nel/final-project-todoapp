@@ -18,6 +18,9 @@ export default {
             login: true
         }
     }
+    // const toggleLogin = ()=>{
+    //     login.value = !login.value
+    // }
 }
 </script>
 

@@ -32,6 +32,12 @@
             >
               Log In
             </button>
+            <button
+              class="px-6 py-2 m-4 text-black rounded-lg hover:bg-blue-900"
+              href="../components/SignUp.vue"
+            >
+              Sign Up
+            </button>
           </div>
         </div>
       </form>

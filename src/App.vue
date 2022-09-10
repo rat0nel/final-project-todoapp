@@ -1,7 +1,7 @@
 <template>
   <section>
-    <Navbar />
     <router-view class="app-main" />
+    <Navbar />
   </section>
 </template>
 
@@ -18,12 +18,12 @@ const { user } = storeToRefs(userStore);
 
 onMounted(async () => {
   try {
-    await userStore.fetchUser(); // here we call fetch user
+    await userStore.fetchUser(); 
     if (!user.value) {
-      // redirect them to logout if the user is not there
+
       router.push({ path: "/auth" });
     } else {
-      // continue to dashboard
+
       router.push({ path: "/" });
     }
   } catch (e) {
