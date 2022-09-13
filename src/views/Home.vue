@@ -1,13 +1,14 @@
 <template>
   <div class="w-full h-screen pt-40">
-    <div class="bg-white p-3 max-w-md mx-auto">
+    <div class="bg-white pt-1 pb-1 max-w-md mx-auto rounded-lg">
       <div class="text-center">
-        <h1 class="text-3xl font-bold">Tasks</h1>
-        <div class="mt-4 flex">
+        <h1 class="text-3xl pt-2 font-bold">Tasks</h1>
+        <div class="mt-4 flex pl-2">
           <input
-            class="w-80 border-b-2 border-gray-500 text-black"
+            class="w-80 border-b-2 border-gray-500 text-black pl-2"
             type="text"
             placeholder="Enter your task here"
+            maxlength="20"
             v-model="title"
           />
           <button
@@ -36,16 +37,18 @@
       <div class="mt-8">
         <ul v-if="tasks.tasks">
           <li v-for="task in tasks.tasks" :key="task.id" class="p-2 rounded-lg">
-            <div class="flex align-middle flex-row justify-between">
-              <div class="p-2">
+            <div class="grid grid-cols-3 grid-rows-1">
+              <div class="flex flex-row col-span-2">
+              <div class="pb-2 pt-2">
                 <input @click.prevent="changeStatus(false, task.id)" v-if="task.is_complete" type="checkbox" class="h-6 w-6" :value="task.is_complete" checked />
                 <input @click.prevent="changeStatus(true, task.id)" v-else type="checkbox" class="h-6 w-6" :value="task.is_complete"  />
               </div>
               <div class="p-2">
-                <p id="title" class="text-lg">{{ task.title }}</p>
-                <!-- <p id="title" class="text-lg line-through text-gray-400">Task Title</p> -->
-                <!-- <input v-model="newTitle" type="text"> -->
+                <p id="title" :class = "{'text-lg':true, 'line-through': task.is_complete, 'text-gray-400': task.is_complete}">{{ task.title }}</p>
               </div>
+              </div>
+
+              <div class="flex flex-row justify-end">
               <button
                 class="flex text-green-500 border-2 border-green-500 p-2 rounded-lg"
                 @click.prevent="promptEdit(task.title, task.id)"
@@ -63,7 +66,7 @@
                 </svg>
               </button>
               <button
-                class="flex text-red-500 border-2 border-red-500 p-2 rounded-lg"
+                class="ml-2 flex text-red-500 border-2 border-red-500 p-2 rounded-lg"
                 @click.prevent="deleteTask(task.id)"
               >
                 <svg
@@ -80,18 +83,12 @@
                   <line x1="9" y1="9" x2="15" y2="15" />
                 </svg>
               </button>
+              </div>
+
             </div>
             <hr class="mt-2" />
           </li>
         </ul>
-      </div>
-      <div class="mt-8">
-        <button class="border-2 border-red-500 p-2 text-red-500">
-          Clear Completed Tasks
-        </button>
-        <button class="border-2 border-indigo-500 p-2 text-indigo-500 ml-4">
-          Reset List
-        </button>
       </div>
     </div>
   </div>
@@ -107,9 +104,11 @@
   
   const title = ref(null);
 
-  const addTask = async () => {
+  const isComplete = ref(true);
 
+  const addTask = async () => {
     await tasks.addTask(title.value, user.user.id);
+    title.value = ""
   }
   onMounted(async()=>{
     await tasks.fetchTasks();

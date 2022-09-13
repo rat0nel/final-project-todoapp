@@ -7,6 +7,7 @@
 
 <script setup>
 import Navbar from "./components/Navbar.vue"
+import Footer from "./components/Footer.vue"
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";

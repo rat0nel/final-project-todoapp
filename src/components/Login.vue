@@ -65,6 +65,11 @@ const login = async () => {
 		console.log(error)
 	}
 };
+
+    // const toggleLogin = ()=>{
+    //     login.value = !login.value
+    // }
+    
 </script>
 
 <style></style>
