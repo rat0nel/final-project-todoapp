@@ -1,27 +1,15 @@
 <template>
-  <Login v-if="login" />
+  <Login v-if="user.login" />
   <SignUp v-else />
 </template>
 
-<script>
+<script setup>
+import { ref } from "vue";
+import { useUserStore } from "../store/user";
+import Login from "../components/Login.vue";
+import SignUp from "../components/SignUp.vue";
 
-    // Event listener
-import Login from '../components/Login.vue'
-import SignUp from '../components/SignUp.vue'
-export default {
-    components: {
-        Login,
-        SignUp
-    },
-    data() {
-        return {
-            login: true
-        }
-    }
-
-}
+const user = useUserStore();
 </script>
 
-<style>
-
-</style>
+<style></style>

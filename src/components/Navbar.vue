@@ -9,51 +9,23 @@
           href="#"
         >
           <span class="text-2xl pl-2"
-            ><i class="em em-notebook_with_decorative_cover"></i> Organize
-            U</span
-          >
+            ><i class="em em-notebook_with_decorative_cover"></i> Organize U
+          </span>
         </a>
       </div>
       <div
-        class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end"
+        class="flex w-full pt-2 content-center justify-center justify-items-center md:w-1/2 md:justify-end"
       >
-        <ul
-          class="list-reset flex justify-between flex-1 md:flex-none items-center"
+        <button
+          class="logout inline-block text-gray-400 no-underline hover:text-gray-200 md:self-center hover:text-underline py-2 px-4"
+          @click.prevent="logout"
         >
-          <li class="mr-3" v-if="currentRoute() === '/'">
-            <a class="inline-block py-2 px-4 text-white no-underline" href="#"
-              >HOME</a
-            >
-          </li>
-          <li class="mr-3" v-if="currentRoute() === '/auth'">
-            <a
-              class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              href="/login"
-              >LOGIN</a
-            >
-          </li>
-          <li class="mr-3" v-if="currentRoute() === '/auth'">
-            <a
-              class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              href="/auth"
-              >SIGNUP</a
-            >
-          </li>
-          <li class="mr-3" v-if="currentRoute() === '/'">
-            <button
-              class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:text-underline py-2 px-4"
-              @click.prevent="logout"
-            >
-              LOG OUT
-            </button>
-          </li>
-        </ul>
+          LOG OUT
+        </button>
       </div>
     </div>
   </nav>
 </template>
-
-
 
 <script setup>
 import { useUserStore } from "../store/user";
@@ -66,12 +38,16 @@ const logout = async () => {
   await user.signOut();
   router.push({ name: "Auth" });
 };
-function currentRoute() {
-  return window.location.pathname;
-};
-function toggleLogin(){
+
+function toggleLogin() {
   user.toggleLogin();
 }
 </script>
 
-<style></style>
+<style>
+  @media only screen and (max-width: 390px) {
+  .logout {
+    flex-direction: column;
+  }
+}
+</style>
