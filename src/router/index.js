@@ -24,6 +24,10 @@ const routes = [{
     path: "/signup",
     name: "SignUp",
     component: SignUp,
+  },
+  {
+    path: "/*",
+    component: 404
   }
 ];
 
